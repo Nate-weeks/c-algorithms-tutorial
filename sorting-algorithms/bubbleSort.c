@@ -1,3 +1,7 @@
+/*    bubbleSort.c - a sorting algorithm
+      by Nate Weeks
+*/
+
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
@@ -38,7 +42,7 @@ void createArray(int arr[], int size){
 
 /* function to call every other function and output the time taken to sort an
 array from least to greatest */
-void functionCaller(int size){
+double functionCaller(int size){
   int random[size];
   createArray(random, size);        // create an array random, populated with random numbers of a given length size
   // printArray(random, 1000000);
@@ -54,28 +58,33 @@ void functionCaller(int size){
 
 // Output the time time taken
   secs = (double)(stop.tv_usec - start.tv_usec) / 1000000 + (double)(stop.tv_sec - start.tv_sec);
-  FILE *f = fopen("bubble.txt", "a");
-  fprintf(f, "time taken for array size %d: %f\n", size, secs);           // write output to file
-  printf("time taken for array size %d: %f\n", size, secs);
+  // FILE *f = fopen("insertion.txt", "a");
+  // fprintf(f, "time taken for array size %d: %f\n", size, secs);           // write output to file
+  // printf("time taken for array size %d: %f\n", size, secs);
   // printf("Sorted array: \n");
   // printArray(random, n);
+  return secs;
 }
 
 int main(){
-  int i;
-  int n = 0;
-  int size = 0;
+  int i, j;
+  double count = 0;
+  int n = 100;
+  int size = 10;
   //int n = 100;            // number of times sort function is run
   // int size = 100;         // size is the size of the random array
-  printf("please enter the number of random arrays you would like to generate and sort:\n");
-  scanf("%d", &n);
-  printf("you chose %d\n", n);
-  printf("please enter the size of the arrays you would like to generate: \n");
-  scanf("%d", &size);
-  printf("you chose %d\n", size);
+  // printf("please enter the number of random arrays you would like to generate and sort:\n");
+  // scanf("%d", &n);
+  // printf("you chose %d\n", n);
+  // printf("please enter the size of the arrays you would like to generate: \n");
+  // scanf("%d", &size);
+  // printf("you chose %d\n", size);
   srand(time(NULL));      // seed random number generator
-  for (i=0; i<n; i++){
-    functionCaller(size);  // create a random array, sort it, and output the time taken
+  for (size=10; size<22000; size=size*3){    // call functionCaller n times for each number size * 3 under 22,000
+    for (i=0; i<n; i++){
+      count += functionCaller(size);  // create a random array, sort it, and output the time taken
+    }
+  printf("bubble,%d,%f\n", size, count/n);
   }
   return 0;
 };
