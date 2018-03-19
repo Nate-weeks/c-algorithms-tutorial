@@ -1,4 +1,4 @@
-/*    selection.c - a sorting algorithm
+/*    bubbleSort.c - a sorting algorithm
       by Nate Weeks
 */
 
@@ -6,27 +6,24 @@
 #include <sys/time.h>
 #include <stdlib.h>
 
-// function to swap 2 values
 void swap(int *xp, int *yp){
   int temp = *xp;
   *xp = *yp;
   *yp = temp;
 };
 
-// sort an array of length n
-void selectionSort(int arr[], int n){
-  int i, j, min_index;              // i = index, j = sub-index
-  for (i = 0; i < n-1; i++){
-    min_index = i;                  // set the index to be compared with the rest of the array to i
-    for (j = i + 1; j < n; j++){    // loop through the indices greater than i
-      if (arr[j] < arr[min_index]){
-        min_index = j;                // shift the min_index to j if arr[j] is smaller than arr[min_index]
+// sort a given array arr[] with length n from least to greatest
+void bubbleSort(int arr[], int n){
+  int i, j;
+  for (i = 0; i < n; i++){
+    for (j = 0; j < n - i - 1; j++){   // iterate through array 1 less slot each loop
+      if (arr[j] > arr[j+1]){          // swap the largest number from left to right
+        swap(&arr[j], &arr[j+1]);
       };
-    swap(&arr[min_index], &arr[i]);   // swap the value at arr[min_index] and arr[i]
     };
+
   };
 };
-
 
 void printArray(int arr[], int size){
   int i;
@@ -56,7 +53,7 @@ double functionCaller(int size){
 
 // function to wrap selectionSort in a timer and run selectionSort on a array random of a given length - size
   gettimeofday(&start, NULL);
-  selectionSort(random, size);
+  bubbleSort(random, size);
   gettimeofday(&stop, NULL);
 
 // Output the time time taken
@@ -87,7 +84,7 @@ int main(){
     for (i=0; i<n; i++){
       count += functionCaller(size);  // create a random array, sort it, and output the time taken
     }
-  printf("selection,%d,%f\n", size, count/n);
+  printf("bubble,%d,%f\n", size, count/n);
   }
   return 0;
 };

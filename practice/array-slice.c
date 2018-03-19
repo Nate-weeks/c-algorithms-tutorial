@@ -21,6 +21,16 @@ int *slice_array(int *array, int start, int end){
   return slice;
 }
 
+// void mergeSort(int arr[], int n){
+//   int mid = n/2;
+//   int *leftHalf = slice_array(arr, 0, mid-1);
+//   int *rightHalf = slice_array(arr, mid, n-1);
+//   printf("left half: ");
+//   printArray(leftHalf, mid + 4);
+//   printf("right half: ");
+//   printArray(rightHalf, mid + 4);
+// }
+
 int main(){
   int arr[] = {1, 2, 3, 4, 5, 6, 7, 8};
   int *x = slice_array(arr, 2, 6);
