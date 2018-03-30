@@ -54,11 +54,11 @@ double functionCaller(sort_function_ptr sorter, int size){
 
 int main(){
   int i;
-  double selection = 0;
-  double insertion = 0;
-  double bubble = 0;
+  double selection = 0; // counter for seconds selectionsort takes
+  double insertion = 0; // counter for seconds insertionSort takes
+  double bubble = 0;    // counter for seconds bubbleSort takes
   int n = 100;
-  int size = 10;
+  int size = 100;
   //int n = 100;            // number of times sort function is run
   // int size = 100;         // size is the size of the random array
   // printf("please enter the number of random arrays you would like to generate and sort:\n");
@@ -68,16 +68,15 @@ int main(){
   // scanf("%d", &size);
   // printf("you chose %d\n", size);
   srand(time(NULL));      // seed random number generator
-  for (size=10; size<100; size=size*3){    // call functionCaller n times for each number size * 3 under 22,000
-    for (i=0; i<n; i++){
-      selection += functionCaller(&selectionSort, size);
+  for (size=10; size<100; size=size*3){    // loop that calls functionCaller with each function
+    for (i=0; i<n; i++){                   // for arrays under 100 size each 3 times bigger than last
+      selection += functionCaller(&selectionSort, size);  // add to a counter the amount of seconds each sort took
       insertion += functionCaller(&insertionSort, size);
       bubble += functionCaller(&bubbleSort, size);
-        // create a random array, sort it, and output the time taken
     }
-  printf("selection,%d,%f\n", size, selection/n);
-  printf("insertion,%d,%f\n", size, insertion/n);
-  printf("bubble,%d,%f\n", size, bubble/n);
+    printf("selection,%d,%f\n", size, selection/n);  // print the average time over 100 tries running the sort
+    printf("insertion,%d,%f\n", size, insertion/n);
+    printf("bubble,%d,%f\n", size, bubble/n);
   }
   return 0;
 };
