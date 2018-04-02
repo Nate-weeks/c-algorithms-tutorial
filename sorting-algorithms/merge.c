@@ -63,7 +63,7 @@ void merge(int arr[], int start, int mid, int end){
     j++;
     k++;
   };
-  // printArray(arr, 7);
+  printArray(arr, 7);
 };
 
 void sort(int arr[], int low, int high){
