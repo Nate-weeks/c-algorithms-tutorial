@@ -6,12 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// defining node as a pointer to a Node struct
 typedef struct Node *node;
 struct Node{
   int data;
   struct Node *next;
 };
 
+//defining list as a pointer to a struct node_list
 typedef struct node_list *list;
 struct node_list{
   int length;
@@ -19,22 +21,23 @@ struct node_list{
   struct Node *last;
 };
 
-typedef struct binary_tree_node *bt_node;
-struct binary_tree_node{
-  int data;
-  struct binary_tree_node *left;
-  struct binary_tree_node *right;
-};
+// typedef struct binary_tree_node *bt_node;
+// struct binary_tree_node{
+//   int data;
+//   struct binary_tree_node *left;
+//   struct binary_tree_node *right;
+// };
 
-// function to print a linked list starting at node n
+// function to print a linked list l starting at the first node
 void printList(list l){
-  node n = l->first;
+  node n = l->first;    // n = first node
   while(n != NULL){
     printf(" %d ", n->data);
     n = n->next;
   };
 };
 
+// function to return a list struct with first and last node initiated as NULL and length 0
 list createList(){
   list new_list = (list)malloc(sizeof(struct node_list));
   new_list->length = 0;
@@ -43,6 +46,7 @@ list createList(){
   return new_list;
 };
 
+// function to return a node object storing data of a given int number
 node createNode(int number){
   node n = (node)malloc(sizeof(struct Node));
   n->data = number;
@@ -50,6 +54,7 @@ node createNode(int number){
   return n;
 };
 
+// function to push a given node n into the end of a given list l
 void push(list l, node n){
   if(l->length == 0){
     l->first = n;
@@ -62,7 +67,7 @@ void push(list l, node n){
   }
 }
 
-// insert a new node n after node prev in the linked-list change
+// insert a new node n, with data - int data- after node prev
 void insertAfter(node prev, int data){
   node n = createNode(data);
   n->next = prev->next;
@@ -85,6 +90,7 @@ int main(){
   push(new_list, head);
   push(new_list, second);
   push(new_list, third);
+  // insert a node after the second node
   insertAfter(second, 3);
   // print the data in each node seperated by spaces starting with the node head
   printf("this linked list contains: \n");
